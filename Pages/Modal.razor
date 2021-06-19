@@ -1,0 +1,88 @@
+﻿@page "/modals"
+
+<h2 class="text-secondary">Basic Modal</h2>
+
+<!-- Basic Modal -->
+<button class="btn btn-outline-primary" @onclick="BasicModal">Click me!</button>
+
+<div class="overlay @modalState"></div>
+<div class="modal1 @modalState">
+    <button class="modal-close-btn btn-close" @onclick="BasicClose">
+    </button>
+    This is modal
+</div>
+<br />
+<br />
+
+<h2 class="text-secondary">Modal up and bottom</h2>
+<!-- Trigger/Open The Modal -->
+<div class="d-grid gap-2 col-6 mx-auto">
+    @foreach (var button in buttons)
+    {
+        <button id="@button.Id" class="btn btn-info text-light" @onclick="@(() => OpenModal(button.Id, button.Class))">
+            @button.Name
+        </button>
+    }
+</div>
+
+<!-- The Modal -->
+<div class="@btnNumber" style="display: @display;">
+    <!-- Modal content -->
+    <div class="@modalContent">
+        <div class="my-modal-header">
+            <span class="close" @onclick="CloseModal">&times;</span>
+            <h2>Modal Header</h2>
+        </div>
+        <div class="my-modal-body">
+            <p>Some text in the Modal Body</p>
+            <p>Some other text...</p>
+        </div>
+        <div class="my-modal-footer">
+            <h3>Modal Footer</h3>
+        </div>
+    </div>
+
+</div>
+<br />
+<br />
+
+@code {
+    string modalState;
+    string display = "none";
+    string btnNumber;
+    string modalContent;
+
+    IEnumerable<Buttons> buttons = new Buttons[] {
+       new Buttons {Id = "up-modal", Name = "Up Modal", Class = "up-modal-content"},
+       new Buttons {Id = "bottom-modal", Name = "Bottom Modal", Class = "bottom-modal-content" }
+        };
+
+    void BasicModal()
+    {
+        modalState = "is-visible";
+    }
+
+    void BasicClose()
+    {
+        modalState = "";
+    }
+
+    void OpenModal(string cssClass, string cssContet)
+    {
+        display = "block";
+        btnNumber = cssClass;
+        modalContent = cssContet;
+    }
+
+    void CloseModal()
+    {
+        display = "";
+    }
+
+    public class Buttons
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Class { get; set; }
+    }
+}

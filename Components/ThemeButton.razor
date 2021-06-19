@@ -1,0 +1,93 @@
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<button type="button" class="btn btn-@buttonType p-1" value="@ticked" @onclick="ChangeTheme">
+    <i class="bi bi-brightness-@themeIcon"></i>
+</button>
+@code {
+
+    bool ticked = false;
+    string themeIcon = "high";
+    string buttonType = "secondary";
+
+    string backgroundColor;
+    string backgroundColor2;
+    string backgroundColor3;
+    string color;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var mode = await localStorage.GetItemAsync<bool>("dark-theme");
+        if (mode == true)
+        {
+            Dark();
+        }
+    }
+
+    async Task ChangeTheme()
+    {
+        ticked = !ticked;
+        if (ticked == true)
+        {
+            await Task.Delay(500);
+            Dark();
+            await localStorage.SetItemAsync("dark-theme", true);
+
+        }
+        else
+        {
+            await Task.Delay(500);
+            Light();
+            await localStorage.SetItemAsync("dark-theme", false);
+
+        }
+    }
+
+    void Dark()
+    {
+        themeIcon = "high-fill";
+        buttonType = "dark";
+
+        backgroundColor = "rgb(44,44,46) !important";
+        backgroundColor2 = "rgb(28,28,30) !important";
+        backgroundColor3 = "rgb(72,72,74) !important";
+        color = "rgb(242,242,247) !important";
+    }
+
+    void Light()
+    {
+        themeIcon = "high";
+        buttonType = "secondary";
+
+        backgroundColor = "";
+        backgroundColor2 = "";
+        backgroundColor3 = "";
+        color = "";
+    }
+}
+
+<style>
+
+    body, optgroup, table {
+        background-color: @backgroundColor;
+        color: @color;
+    }
+
+    ul, nav, .sidebar, .dropdown-item, .my-modal-body {
+        background-color: @backgroundColor2;
+        color: @color;
+    }
+
+    input:not(.form-check-input), select, textarea{
+        background-color: @backgroundColor3;
+        color: @color;
+    }
+    .dropdown-item:focus, .dropdown-item:hover {
+        color: @color;
+        background-color: @backgroundColor3;
+    }
+
+    span, p, i {
+        color: @color;
+    }
+</style>

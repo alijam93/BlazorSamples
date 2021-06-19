@@ -1,0 +1,32 @@
+﻿@if (Parent.ActiveStep == this)
+{
+    <div id="step-@(Parent.StepsIndex(this) + 1)" class="border border-primary border-4 p-3">
+        @ChildContent
+    </div>
+}
+@code {
+    /// <summary>
+    /// The <see cref="Tab"/> container
+    /// </summary>
+    [CascadingParameter] protected internal Tab Parent { get; set; }
+
+    /// <summary>
+    /// The Child Content of the current <see cref="TabStep"/>
+    /// </summary>
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// The Name of the step
+    /// </summary>
+    [Parameter] public string Name { get; set; }
+    /// <summary>
+    /// The Icon of the step
+    /// </summary>
+    [Parameter] public string Icon { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        Parent.AddStep(this);
+    }
+}

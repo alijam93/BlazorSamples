@@ -1,0 +1,81 @@
+﻿@typeparam TItem
+@typeparam TValue
+
+<CascadingValue Name="Standalone" Value="false" IsFixed="true">
+    <div class="custom-select">
+        <div class="selected" @onclick="OnShow">
+            <i class="bi bi-chevron-compact-down select-icon"></i>
+            <span class="select-icon"></span>
+            @if (Placeholder != null)
+            {
+                <img src="@DefaultIcon" height="14" class="mr-1" />
+                <span>@Placeholder</span>
+            }
+            else
+            {
+                <span class="text-muted">Choose...</span>
+            }
+        </div>
+        <CascadingValue Value="@this" IsFixed="true">
+            <div class="list-group shadow @(show ? "hide-select":"")">
+                @ChildContent
+            </div>
+        </CascadingValue>
+    </div>
+</CascadingValue>
+
+
+@code {
+    bool show = false;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public TValue Placeholder { get; set; }
+    [Parameter] public string DefaultIcon { get; set; }
+
+    void OnShow() => show = !show; 
+
+    public async Task HandleSelect(TItem item, TValue value, string icon)
+    {
+        Placeholder = value;
+        DefaultIcon = icon;
+        this.show = false;
+        StateHasChanged();
+    }
+}
+
+<style>
+    .hide-select {
+        display: block !important;
+    }
+
+    .list-group {
+        display: none;
+    }
+
+    .custom-select {
+        position: relative;
+        width: 18rem;
+        text-align: left;
+        outline: none;
+        height: 2.9rem;
+        line-height: 2.9rem;
+    }
+
+    .selected {
+        border-radius: 6px;
+        border: 1px solid #858586;
+        color: #080D0E;
+        height: 2.9rem;
+        padding-left: .5rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .select-icon {
+        position: absolute;
+        right: 10px;
+        height: 0;
+    }
+</style>
+
+
