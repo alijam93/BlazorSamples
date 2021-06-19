@@ -1,0 +1,45 @@
+name: Deploy to github
+
+# Run workflow on every push to the master branch
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        # Checkout the code
+        - uses: actions/checkout@v2
+
+        # Install .NET Core SDK
+        - name: Setup .NET Core
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: 5.0.x
+        # Generate the website
+        - name: Publish
+          run: dotnet publish BlazorSamples.csproj -c Release -o release --nologo
+
+        # changes the base-tag in index.html from '/' to 'Example' to match GitHub Pages repository subdirectory 
+        - name: Rewrite base href
+          uses: SteveSandersonMS/ghaction-rewrite-base-href@v1 
+          with:
+           html_path: 'release/wwwroot/index.html'
+           base_href: '/BlazorSamples/'
+
+        # copy index.html to 404.html to serve the same file when a file is not found
+        - name: copy index.html to 404.html
+          run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+        # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
+        - name: Add .nojekyll file
+          run: touch release/wwwroot/.nojekyll
+
+        # Publish the website
+        - name: Commit wwwroot to GitHub Pages
+          uses: JamesIves/github-pages-deploy-action@3.7.1
+          with:
+            ACCESS_TOKEN: ${{ secrets.PUBLISH_TOKEN }} 
+            BRANCH: gh-pages # The branch the action should deploy to.
+            FOLDER: release/wwwroot # The folder the action should deploy. 
