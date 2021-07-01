@@ -1,55 +1,64 @@
 ﻿@typeparam TItem
 @typeparam TValue
+@inject IJSRuntime JS
 
-<CascadingValue Name="Standalone" Value="false" IsFixed="true">
-    <div class="custom-select">
-        <div class="selected" @onclick="OnShow">
-            <i class="bi bi-chevron-compact-down select-icon"></i>
-            <span class="select-icon"></span>
-            @if (Placeholder != null)
-            {
-                <img src="@DefaultIcon" height="14" class="mr-1" />
-                <span>@Placeholder</span>
-            }
-            else
-            {
-                <span class="text-muted">Choose...</span>
-            }
-        </div>
-        <CascadingValue Value="@this" IsFixed="true">
-            <div class="list-group shadow @(show ? "hide-select":"")">
-                @ChildContent
-            </div>
-        </CascadingValue>
+<div class="custom-select" id="@triggerId">
+    <div class="selected" @onclick="Show">
+        <i class="bi bi-chevron-compact-down select-icon"></i>
+        <span class="select-icon"></span>
+        @if (Placeholder != null)
+        {
+            <img src="@DefaultIcon" height="14" class="mr-1" />
+            <span>@Placeholder</span>
+        }
+        else
+        {
+            <span class="text-muted">Choose...</span>
+        }
     </div>
-</CascadingValue>
+    <CascadingValue Value="@this" IsFixed="true">
 
+        <div class="dropdown-menu shadow" id="@selectId" style="display: @optionClass">
+            @ChildContent
+        </div>
+    </CascadingValue>
+</div>
 
 @code {
-    bool show = false;
+    string optionClass = "";
+    private string triggerId { get; set; } = Guid.NewGuid().ToString();
+    private string selectId { get; set; } = Guid.NewGuid().ToString();
 
     [Parameter] public RenderFragment ChildContent { get; set; }
     [Parameter] public TValue Placeholder { get; set; }
     [Parameter] public string DefaultIcon { get; set; }
 
-    void OnShow() => show = !show; 
+    async Task Show()
+    {
+        await JS.InvokeAsync<object>("SelectToggle", triggerId, selectId);
+    }
 
-    public async Task HandleSelect(TItem item, TValue value, string icon)
+    public void HandleSelect(TItem item, TValue value, string icon)
     {
         Placeholder = value;
         DefaultIcon = icon;
-        this.show = false;
+
+        if (optionClass == "")
+        {
+            optionClass = "none";
+        }
+        else
+        {
+            optionClass = "";
+        }
+
         StateHasChanged();
     }
 }
 
 <style>
-    .hide-select {
-        display: block !important;
-    }
-
-    .list-group {
-        display: none;
+    .dropdown-menu {
+        width: 18rem;
     }
 
     .custom-select {
