@@ -18,8 +18,8 @@
             disabled="@(ActiveStepIx == 0)" @onclick="GoBack">
         Previous
     </button>
-    <button class="btn btn-@(IsLastStep ? "success" : "primary") rounded-pill"
-            type="@(IsLastStep ? "submit" : "button")" @onclick="GoNext">
+    <button class="@SuccessOrPrimaryClass"
+            type="@SuccessOrPrimaryType" @onclick="GoNext">
         @(IsLastStep ? "Submit" : "Next")
     </button>
 </CascadingValue> 

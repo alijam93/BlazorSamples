@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponentUtilities;
+
+using Microsoft.AspNetCore.Components;
 
 using System;
 using System.Collections.Generic;
@@ -9,6 +11,21 @@ namespace BlazorSamples.Components.Tab
 {
     public partial class Tab
     {
+        protected string SuccessOrPrimaryClass =>
+            new CssBuilder("btn")
+                .SetPrefix("btn-")
+                .AddClass("success", when: IsLastStep)
+                .AddClass("primary", when: !IsLastStep)
+                .SetPrefix(string.Empty)
+                .AddClass("rounded-pill")
+                .AddClass("ms-2")
+                .Build();
+
+        protected string SuccessOrPrimaryType =>
+            new CssBuilder(string.Empty)
+                .AddClass("success", when: IsLastStep)
+                .AddClass("primary", when: !IsLastStep)
+                .Build();
 
         /// <summary>
         /// List of <see cref="TabStep"/> added to the Tab
@@ -19,7 +36,7 @@ namespace BlazorSamples.Components.Tab
         /// The control Id
         /// </summary>
         [Parameter]
-        public string Id { get; set; } 
+        public string Id { get; set; }
 
         /// <summary>
         /// The ChildContent container for <see cref="TabStep"/>
