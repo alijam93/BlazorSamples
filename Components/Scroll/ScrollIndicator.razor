@@ -1,0 +1,53 @@
+﻿@inject IJSRuntime JS
+
+<div class="progress-header">
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<div class="progress-content">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("verticalIndicator");
+        }
+    }
+}
+
+<style>
+    .progress-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .progress-container {
+        /* background-color: rgba(150, 150, 150, 0.6); */
+        height: 10px;
+        width: 100%;
+    }
+
+    .progress-bar {
+        /* background-color: #2196f3; */
+        background: linear-gradient(43deg, #ba00ff, #009dff);
+        height: .3rem;
+        border-radius: 4rem;
+        width: 0%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .progress-content {
+        padding: 2em;
+    }
+</style>
