@@ -1,0 +1,40 @@
+﻿@inject IJSRuntime JS
+
+<button @onclick="TopFunction" id="scroll-btn" title="Go to top">&#11165; </button>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("onScrollEvent");
+        }
+    }
+
+    async Task TopFunction()
+    {
+        await JS.InvokeVoidAsync("onScrollButton");
+    }
+}
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    #scroll-btn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        z-index: 99;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: aliceblue;
+        cursor: pointer;
+    }
+</style>
