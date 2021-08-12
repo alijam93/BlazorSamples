@@ -20,3 +20,19 @@ function verticalIndicator() {
         document.getElementById("progressBar").style.width = scrolled + "%";
     });
 }
+
+function onScrollEvent() {
+    var toTop = document.getElementById("scroll-btn");
+    window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 100) {
+            toTop.style.display = "block";
+        } else {
+            toTop.style.display = "none";
+        }
+    });
+}
+
+function onScrollButton() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
