@@ -1,15 +1,18 @@
 ﻿@page "/modals"
+@inject IJSRuntime JS
 
 <h2 class="text-secondary">Basic Modal</h2>
 
 <!-- Basic Modal -->
 <button class="btn btn-outline-primary" @onclick="BasicModal">Click me!</button>
 
-<div class="overlay @modalState"></div>
-<div class="modal1 @modalState">
-    <button class="modal-close-btn btn-close" @onclick="BasicClose">
-    </button>
-    This is modal
+<div id="basicModal">
+    <div class="overlay @modalState" @onclick="BasicClose"></div>
+    <div class="modal1 @modalState">
+        <button class="modal-close-btn btn-close" @onclick="BasicClose">
+        </button>
+        This is modal
+    </div>
 </div>
 <br />
 <br />
@@ -27,6 +30,7 @@
 
 <!-- The Modal -->
 <div class="@btnNumber" style="display: @display;">
+    <div class="overlay is-visible" @onclick="CloseModal"></div>
     <!-- Modal content -->
     <div class="@modalContent">
         <div class="my-modal-header">
@@ -57,7 +61,7 @@
        new Buttons {Id = "bottom-modal", Name = "Bottom Modal", Class = "bottom-modal-content" }
         };
 
-    void BasicModal()
+    async Task BasicModal()
     {
         modalState = "is-visible";
     }
@@ -77,6 +81,7 @@
     void CloseModal()
     {
         display = "";
+        modalState = "";
     }
 
     public class Buttons
