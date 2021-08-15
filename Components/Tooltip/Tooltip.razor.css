@@ -1,0 +1,127 @@
+﻿/*.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+    .tooltip-wrapper .tooltiptext {
+        visibility: hidden;
+        width: 150px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+        .tooltip-wrapper .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+    .tooltip-wrapper:hover .tooltiptext {
+        visibility: visible;
+    }
+*/
+
+.tooltip-center {
+    position: relative;
+    display: inline-block;
+}
+
+    .tooltip-center .tooltip-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #363636;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+/* Tooltip top content */
+.tooltip-top .tooltip-text {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    /* 120/2 = 60 */
+}
+
+/* Tooltip right content */
+.tooltip-right .tooltip-text {
+    top: -5px;
+    left: 110%;
+}
+
+/* Tooltip bottom content */
+.tooltip-bottom .tooltip-text {
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    /* 120/2 = 60 */
+}
+
+/* Tooltip left content */
+.tooltip-left .tooltip-text {
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip-center .tooltip-text::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+}
+
+/* Tooltip top arrow */
+.tooltip-top .tooltip-text::after {
+    margin-left: -5px;
+    left: 50%;
+    top: 100%;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Tooltip bottom arrow */
+.tooltip-bottom .tooltip-text::after {
+    margin-left: -5px;
+    bottom: 100%;
+    left: 50%;
+    border-color: transparent transparent #555 transparent;
+}
+
+/* Tooltip left arrow */
+.tooltip-left .tooltip-text::after {
+    top: 50%;
+    margin-top: -5px;
+    left: 100%;
+    border-color: transparent transparent transparent #555;
+}
+
+/* Tooltip right arrow */
+.tooltip-right .tooltip-text::after {
+    top: 50%;
+    margin-top: -5px;
+    right: 100%;
+    border-color: transparent #555 transparent transparent;
+}
+
+.tooltip-center:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

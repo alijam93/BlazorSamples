@@ -1,0 +1,19 @@
+﻿@page "/tooltip"
+@using BlazorSamples.Components.Tooltip
+
+
+<br />
+<br />
+<Tooltip Text="Tooltip content" Direction=@DirType.Top>
+    <button type="button" class="btn btn-light">Top</button>
+</Tooltip>
+<Tooltip Text="Tooltip content" Direction=@DirType.Right>
+    <button type="button" class="btn btn-light">Right</button>
+</Tooltip>
+<Tooltip Text="Tooltip content" Direction=@DirType.Left>
+    <button type="button" class="btn btn-light">Left</button>
+</Tooltip>
+@*Bottom is default direction*@
+<Tooltip Text="Tooltip content">
+    <button type="button" class="btn btn-light">Bottom</button>
+</Tooltip>
