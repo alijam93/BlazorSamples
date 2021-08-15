@@ -1,6 +1,134 @@
-/* /Pages/Modal.razor.rz.scp.css */
+/* /Components/Tooltip/Tooltip.razor.rz.scp.css */
+/*.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+    .tooltip-wrapper .tooltiptext {
+        visibility: hidden;
+        width: 150px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+        .tooltip-wrapper .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+    .tooltip-wrapper:hover .tooltiptext {
+        visibility: visible;
+    }
+*/
+
+.tooltip-center[b-544e0nfdmm] {
+    position: relative;
+    display: inline-block;
+}
+
+    .tooltip-center .tooltip-text[b-544e0nfdmm] {
+        visibility: hidden;
+        width: 120px;
+        background-color: #363636;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+/* Tooltip top content */
+.tooltip-top .tooltip-text[b-544e0nfdmm] {
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    /* 120/2 = 60 */
+}
+
+/* Tooltip right content */
+.tooltip-right .tooltip-text[b-544e0nfdmm] {
+    top: -5px;
+    left: 110%;
+}
+
+/* Tooltip bottom content */
+.tooltip-bottom .tooltip-text[b-544e0nfdmm] {
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+    /* 120/2 = 60 */
+}
+
+/* Tooltip left content */
+.tooltip-left .tooltip-text[b-544e0nfdmm] {
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip-center .tooltip-text[b-544e0nfdmm]::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+}
+
+/* Tooltip top arrow */
+.tooltip-top .tooltip-text[b-544e0nfdmm]::after {
+    margin-left: -5px;
+    left: 50%;
+    top: 100%;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Tooltip bottom arrow */
+.tooltip-bottom .tooltip-text[b-544e0nfdmm]::after {
+    margin-left: -5px;
+    bottom: 100%;
+    left: 50%;
+    border-color: transparent transparent #555 transparent;
+}
+
+/* Tooltip left arrow */
+.tooltip-left .tooltip-text[b-544e0nfdmm]::after {
+    top: 50%;
+    margin-top: -5px;
+    left: 100%;
+    border-color: transparent transparent transparent #555;
+}
+
+/* Tooltip right arrow */
+.tooltip-right .tooltip-text[b-544e0nfdmm]::after {
+    top: 50%;
+    margin-top: -5px;
+    right: 100%;
+    border-color: transparent #555 transparent transparent;
+}
+
+.tooltip-center:hover .tooltip-text[b-544e0nfdmm] {
+    visibility: visible;
+    opacity: 1;
+}
+/* /Pages/ModalPage.razor.rz.scp.css */
 /** Modal */
-.modal1[b-o4ffuyjwa8] {
+.modal1[b-g47iuv3jvj] {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s;
@@ -16,7 +144,7 @@
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
-.modal-close-btn[b-o4ffuyjwa8] {
+.modal-close-btn[b-g47iuv3jvj] {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -24,7 +152,7 @@
 }
 
 /** Overlay */
-.overlay[b-o4ffuyjwa8] {
+.overlay[b-g47iuv3jvj] {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s;
@@ -38,13 +166,13 @@
     background-color: rgba(0,0,0,0.3);
 }
 
-.is-visible[b-o4ffuyjwa8] {
+.is-visible[b-g47iuv3jvj] {
     opacity: 1;
     pointer-events: auto;
 }
 
 /* Up Modal */
-.up-modal[b-o4ffuyjwa8] {
+.up-modal[b-g47iuv3jvj] {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -56,7 +184,7 @@
     overflow: auto; /* Enable scroll if needed */
 }
 
-.up-modal-content[b-o4ffuyjwa8] {
+.up-modal-content[b-g47iuv3jvj] {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -65,7 +193,7 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
-    animation-name: animatetop-b-o4ffuyjwa8;
+    animation-name: animatetop-b-g47iuv3jvj;
     animation-duration: 0.4s
 }
 
@@ -82,7 +210,7 @@
     }
 }
 
-@keyframes animatetop-b-o4ffuyjwa8 {
+@keyframes animatetop-b-g47iuv3jvj {
     from {
         top: -300px;
         opacity: 0
@@ -95,7 +223,7 @@
 }
 
 /* Bottom Modal */
-.bottom-modal[b-o4ffuyjwa8] {
+.bottom-modal[b-g47iuv3jvj] {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -106,12 +234,12 @@
     overflow: auto; /* Enable scroll if needed */
     -webkit-animation-name: fadeIn; /* Fade in the background */
     -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn-b-o4ffuyjwa8;
+    animation-name: fadeIn-b-g47iuv3jvj;
     animation-duration: 0.4s
 }
 
 /* Modal Content */
-.bottom-modal-content[b-o4ffuyjwa8] {
+.bottom-modal-content[b-g47iuv3jvj] {
     position: fixed;
     bottom: 0;
     background-color: #fefefe;
@@ -119,7 +247,7 @@
     margin-left: 40%;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
-    animation-name: slideIn-b-o4ffuyjwa8;
+    animation-name: slideIn-b-g47iuv3jvj;
     animation-duration: 0.4s
 }
 
@@ -135,7 +263,7 @@
     }
 }
 
-@keyframes slideIn-b-o4ffuyjwa8 {
+@keyframes slideIn-b-g47iuv3jvj {
     from {
         bottom: -300px;
         opacity: 0
@@ -157,7 +285,7 @@
     }
 }
 
-@keyframes fadeIn-b-o4ffuyjwa8 {
+@keyframes fadeIn-b-g47iuv3jvj {
     from {
         opacity: 0
     }
@@ -168,38 +296,38 @@
 }
 
 /* The Close Button */
-.close[b-o4ffuyjwa8] {
+.close[b-g47iuv3jvj] {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-    .close:hover[b-o4ffuyjwa8],
-    .close:focus[b-o4ffuyjwa8] {
+    .close:hover[b-g47iuv3jvj],
+    .close:focus[b-g47iuv3jvj] {
         color: #000;
         text-decoration: none;
         cursor: pointer;
     }
 
-.my-modal-header[b-o4ffuyjwa8] {
+.my-modal-header[b-g47iuv3jvj] {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.my-modal-body[b-o4ffuyjwa8] {
+.my-modal-body[b-g47iuv3jvj] {
     padding: 2px 16px;
 }
 
-.my-modal-footer[b-o4ffuyjwa8] {
+.my-modal-footer[b-g47iuv3jvj] {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
 @media (max-width: 641px) {
-    .up-modal-content[b-o4ffuyjwa8] {
+    .up-modal-content[b-g47iuv3jvj] {
         width: 400px;
     }
 }
